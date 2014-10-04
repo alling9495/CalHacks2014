@@ -94,6 +94,37 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
 
         castText.setOnTouchListener(this);
     }
+    @Override
+    protected void onPause() {
+        if (isFinishing()) {
+            // End media router discovery
+            mMediaRouter.removeCallback(mMediaRouterCallback);
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mMediaRouter.addCallback(mMediaRouteSelector, mMediaRouterCallback,
+                MediaRouter.CALLBACK_FLAG_REQUEST_DISCOVERY);
+    }
+
+    @Override
+    protected void onStop() {
+        mMediaRouter.removeCallback(mMediaRouterCallback);
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        if(isFinishing()) {
+            teardown();
+        }
+    }
+
 
 
     @Override
@@ -419,7 +450,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
             Log.d(DEBUG_TAG, "onFling: " + event1.toString()+event2.toString());
             Log.d(DEBUG_TAG, "velocityX: " + velocityX);
             Log.d(DEBUG_TAG, "velocityY: " + velocityY);
-
+            castText.setEnabled(false);
             float swipeVelocity = ViewConfiguration.get(getApplicationContext()).getScaledMinimumFlingVelocity() * SWIPE_FRICTION;
             if (velocityX > swipeVelocity) {
                 // swipe sideways (navigate cards)
@@ -430,6 +461,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                 // swipe down (delete focused note on cast)
                 // OR delete current note being created
             }
+            castText.setEnabled(true);
             return true;
         }
     }

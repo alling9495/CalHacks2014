@@ -19,13 +19,14 @@
 
     <EditText
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="300dp"
         android:id="@+id/castText"
         android:background="@drawable/sticky_note_background"
         android:alpha="0.3"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
         android:text="Tap me baby. You know you want to ;)"
         android:padding="40dp"
-        android:gravity="top"/>
+        android:gravity="top"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
