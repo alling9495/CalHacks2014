@@ -66,7 +66,7 @@ public class StikitActivity extends Activity {
         int errorCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         if(errorCode != ConnectionResult.SUCCESS)
         {
-            GooglePlayServicesUtil.getErrorDialog(errorCode,this,1001);
+            GooglePlayServicesUtil.getErrorDialog(errorCode,this,REQUEST_CODE);
             return;
         }
         mMediaRouter.addCallback(mMediaRouteSelector, mMediaRouterCallback,
@@ -97,6 +97,7 @@ public class StikitActivity extends Activity {
     {
         String text = castText.getText().toString();
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+        sendMessage(text);
     }
     /**
      * Callback for MediaRouter events
