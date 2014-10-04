@@ -122,8 +122,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         return super.onOptionsItemSelected(item);
     }
 
-    public void cast(View v)
-    {
+    public void cast(View v) {
         String text = castText.getText().toString();
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
         sendMessage(text);
