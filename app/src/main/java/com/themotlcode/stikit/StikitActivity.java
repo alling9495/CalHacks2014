@@ -3,6 +3,7 @@ package com.themotlcode.stikit;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.MediaRouteActionProvider;
 import android.util.Log;
 import android.view.Menu;
@@ -27,7 +28,7 @@ import android.support.v7.media.MediaRouter;
 
 import java.io.IOException;
 
-public class StikitActivity extends Activity {
+public class StikitActivity extends ActionBarActivity {
 
     private static final String TAG = "Blake";
 
