@@ -33,7 +33,7 @@ import android.support.v7.media.MediaRouter;
 
 import java.io.IOException;
 
-public class StikitActivity extends ActionBarActivity {
+public class StikitActivity extends ActionBarActivity implements View.OnTouchListener {
 
     private static final String TAG = "Blake";
 
@@ -68,7 +68,6 @@ public class StikitActivity extends ActionBarActivity {
                                 .getString(R.string.app_id))).build();
         mMediaRouterCallback = new MyMediaRouterCallback();
         gestureDetector = new GestureDetectorCompat(this, new MyGestureListener());
-
     }
 
     @Override
@@ -83,6 +82,8 @@ public class StikitActivity extends ActionBarActivity {
         }
         mMediaRouter.addCallback(mMediaRouteSelector, mMediaRouterCallback,
                 MediaRouter.CALLBACK_FLAG_REQUEST_DISCOVERY);
+
+        castText.setOnTouchListener(this);
     }
 
 
@@ -368,9 +369,9 @@ public class StikitActivity extends ActionBarActivity {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event){
-        this.gestureDetector.onTouchEvent(event);
-        return super.onTouchEvent(event);
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        this.gestureDetector.onTouchEvent(motionEvent);
+        return true;
     }
 
     class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
