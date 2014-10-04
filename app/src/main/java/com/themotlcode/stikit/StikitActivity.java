@@ -39,7 +39,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
 
     private static final int REQUEST_CODE = 1;
 
-    private static final float SWIPE_FRICTION = 3.0;
+    private static final float SWIPE_FRICTION = 3.0f;
 
     private MediaRouter mMediaRouter;
     private MediaRouteSelector mMediaRouteSelector;
@@ -110,8 +110,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         return super.onOptionsItemSelected(item);
     }
 
-    public void cast(View v)
-    {
+    public void cast(View v) {
         String text = castText.getText().toString();
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
         sendMessage(text);
