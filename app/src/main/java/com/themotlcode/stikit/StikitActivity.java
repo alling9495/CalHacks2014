@@ -46,13 +46,13 @@ public class StikitActivity extends ActionBarActivity {
     private boolean mApplicationStarted;
     private boolean mWaitingForReconnect;
     private String mSessionId;
-    private Button castButton;
+    //private Button castButton;
     private EditText castText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stikit);
-        castButton = (Button)findViewById(R.id.castButton);
+        //castButton = (Button)findViewById(R.id.castButton);
         castText = (EditText)findViewById(R.id.castText);
         mMediaRouter = MediaRouter.getInstance(getApplicationContext());
         mMediaRouteSelector = new MediaRouteSelector.Builder()

@@ -8,22 +8,22 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".StikitActivity">
 
-    <Button
+    <!--<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Stick It!"
         android:id="@+id/castButton"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="cast" />
+        android:onClick="cast" />-->
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:id="@+id/castText"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Tap me baby. You know you want to ;)"
+        android:layout_marginBottom="40dp" />
 </RelativeLayout>
