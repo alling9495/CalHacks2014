@@ -1,6 +1,7 @@
 package com.themotlcode.stikit;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.gesture.GestureOverlayView;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -8,6 +9,7 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.MediaRouteActionProvider;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.GestureDetector;
 import android.view.Menu;
@@ -70,6 +72,11 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                                 .getString(R.string.app_id))).build();
         mMediaRouterCallback = new MyMediaRouterCallback();
         gestureDetector = new GestureDetectorCompat(this, new MyGestureListener());
+        AlertDialog.Builder colorPicker = new AlertDialog.Builder(this);
+        LayoutInflater inflater =  getLayoutInflater();
+        colorPicker.setView(inflater.inflate(R.layout.color_picker, null));
+        colorPicker.setTitle("Stickit Color");
+        colorPicker.show();
     }
 
     @Override
@@ -339,7 +346,6 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     private void sendMessage(String message) {
         if (mApiClient != null && mHelloWorldChannel != null) {
             try {
-                Log.e(TAG, "Message Sent!");
                 Cast.CastApi.sendMessage(mApiClient,
                         mHelloWorldChannel.getNamespace(), message)
                         .setResultCallback(new ResultCallback<Status>() {
