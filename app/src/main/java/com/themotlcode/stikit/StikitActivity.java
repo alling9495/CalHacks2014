@@ -13,6 +13,7 @@ import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -53,6 +54,7 @@ public class StikitActivity extends ActionBarActivity {
     private Button castButton;
     private EditText castText;
     private GestureDetectorCompat gestureDetector;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,7 @@ public class StikitActivity extends ActionBarActivity {
                                 .getString(R.string.app_id))).build();
         mMediaRouterCallback = new MyMediaRouterCallback();
         gestureDetector = new GestureDetectorCompat(this, new MyGestureListener());
+
     }
 
     @Override
@@ -364,6 +367,12 @@ public class StikitActivity extends ActionBarActivity {
 
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.gestureDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
     class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
         private static final String DEBUG_TAG = "Gestures";
 
@@ -377,6 +386,11 @@ public class StikitActivity extends ActionBarActivity {
         public boolean onFling(MotionEvent event1, MotionEvent event2,
                                float velocityX, float velocityY) {
             Log.d(DEBUG_TAG, "onFling: " + event1.toString()+event2.toString());
+            Log.d(DEBUG_TAG, "velocityX: " + velocityX);
+            Log.d(DEBUG_TAG, "velocityY: " + velocityY);
+            if (Math.abs(velocityY) > ViewConfiguration.get(getApplicationContext()).getScaledMinimumFlingVelocity()) {
+                cast(null);
+            }
             return true;
         }
     }
