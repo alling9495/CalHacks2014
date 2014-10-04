@@ -149,12 +149,6 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
             case R.id.colorPicker:
                 // custom dialog
                 final Dialog colorPickerDialog = new Dialog(this);
-                // center underlying frame layout
-                ViewGroup decorView = (ViewGroup) colorPickerDialog.getWindow().getDecorView();
-                View content = decorView.getChildAt(0);
-                FrameLayout.LayoutParams contentParams = (FrameLayout.LayoutParams) content.getLayoutParams();
-                contentParams.gravity = Gravity.CENTER;
-                content.setLayoutParams(contentParams);
 
                 colorPickerDialog.setTitle("Stickit Color");
                 colorPickerDialog.setContentView(R.layout.color_picker);
@@ -164,7 +158,6 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                         colorPickerDialog.dismiss();
                     }
                 });
-
 
                 colorPickerDialog.show();
             break;
