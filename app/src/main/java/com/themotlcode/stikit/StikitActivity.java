@@ -4,14 +4,21 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 
 public class StikitActivity extends Activity {
 
+    private Button castButton;
+    private EditText castText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stikit);
+        castButton = (Button)findViewById(R.id.castButton);
+        castText = (EditText)findViewById(R.id.castText);
     }
 
 
@@ -32,5 +39,10 @@ public class StikitActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void cast(View v)
+    {
+        String text = castText.getText().toString();
     }
 }
