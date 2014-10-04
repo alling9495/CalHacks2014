@@ -148,10 +148,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         switch(id){
             case R.id.colorPicker:
                 // custom dialog
-                final Dialog colorPickerDialog = new Dialog(this);
-
-                colorPickerDialog.setTitle("Stickit Color");
-                colorPickerDialog.setContentView(R.layout.color_picker);
+                final ColorPickerDialog colorPickerDialog = new ColorPickerDialog(this);
 
                 colorPickerDialog.show();
             break;
