@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="C:\Users\Alex Ling\Documents\GitHub\CalHacks2014-Stikit-App\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-c30e376a8a37b42530721aa3276156097e39d8df.jar"
+        jar="C:\Program Files (x86)\Android\android-sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
+    <item
+        dex="C:\Users\Alex Ling\Documents\GitHub\CalHacks2014-Stikit-App\app\build\intermediates\pre-dexed\debug\classes-fdcfcf8dd6d34149cf27a8401e0407969d6ab964.jar"
+        jar="C:\Users\Alex Ling\Documents\GitHub\CalHacks2014-Stikit-App\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\18.0.0\classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="6676e4718242b72477efc17f7acc0304bcb17b3b"/>
+    <item
+        dex="C:\Users\Alex Ling\Documents\GitHub\CalHacks2014-Stikit-App\app\build\intermediates\pre-dexed\debug\classes-568bfd141b6009f531c0cf1eaeed1bcd35ed95a3.jar"
+        jar="C:\Users\Alex Ling\Documents\GitHub\CalHacks2014-Stikit-App\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\5.2.08\classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="1ed7a7a05185651f9af41ad93711cb96b66f331c"/>
+    <item
+        dex="C:\Users\Alex Ling\Documents\GitHub\CalHacks2014-Stikit-App\app\build\intermediates\pre-dexed\debug\classes-5b1d5841c4512af31577d0240a923ef33039248a.jar"
+        jar="C:\Users\Alex Ling\Documents\GitHub\CalHacks2014-Stikit-App\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\18.0.0\classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="8f11f56e350eacabf2273f646d981356eea0ed77"/>
+    <item
+        dex="C:\Users\Alex Ling\Documents\GitHub\CalHacks2014-Stikit-App\app\build\intermediates\pre-dexed\debug\internal_impl-18.0.0-3fe2773bdb213eef9619e785fe5a6fd53f673c74.jar"
+        jar="C:\Users\Alex Ling\Documents\GitHub\CalHacks2014-Stikit-App\app\build\intermediates\exploded-aar\com.android.support\mediarouter-v7\18.0.0\libs\internal_impl-18.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="fa981efe800d521c19e23e684c609a232e6b8c5e"/>
+
+</pre-dex-items>
