@@ -9,6 +9,7 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.MediaRouteActionProvider;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.GestureDetector;
@@ -16,9 +17,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
+import android.app.Dialog;
 
 import com.google.android.gms.cast.ApplicationMetadata;
 import com.google.android.gms.cast.Cast;
@@ -58,7 +62,6 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     //private Button castButton;
     private EditText castText;
     private GestureDetectorCompat gestureDetector;
-    private AlertDialog.Builder colorPicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,10 +76,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                                 .getString(R.string.app_id))).build();
         mMediaRouterCallback = new MyMediaRouterCallback();
         gestureDetector = new GestureDetectorCompat(this, new MyGestureListener());
-        colorPicker = new AlertDialog.Builder(this);
         LayoutInflater inflater =  getLayoutInflater();
-        colorPicker.setView(inflater.inflate(R.layout.color_picker, null, false));
-        colorPicker.setTitle("Stickit Color");
     }
 
     @Override
@@ -147,8 +147,27 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         int id = item.getItemId();
         switch(id){
             case R.id.colorPicker:
-                colorPicker.show();
-                break;
+                // custom dialog
+                final Dialog colorPickerDialog = new Dialog(this);
+                // center underlying frame layout
+                ViewGroup decorView = (ViewGroup) colorPickerDialog.getWindow().getDecorView();
+                View content = decorView.getChildAt(0);
+                FrameLayout.LayoutParams contentParams = (FrameLayout.LayoutParams) content.getLayoutParams();
+                contentParams.gravity = Gravity.CENTER;
+                content.setLayoutParams(contentParams);
+
+                colorPickerDialog.setTitle("Stickit Color");
+                colorPickerDialog.setContentView(R.layout.color_picker);
+                colorPickerDialog.findViewById(R.id.ok_button).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        colorPickerDialog.dismiss();
+                    }
+                });
+
+
+                colorPickerDialog.show();
+            break;
         }
         return super.onOptionsItemSelected(item);
     }
