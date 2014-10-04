@@ -370,8 +370,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        this.gestureDetector.onTouchEvent(motionEvent);
-        return true;
+        return this.gestureDetector.onTouchEvent(motionEvent);
     }
 
     class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
