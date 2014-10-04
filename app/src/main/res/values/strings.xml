@@ -4,5 +4,6 @@
     <string name="app_name">Stikit</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-
+    <string name="app_id">24C20C62</string>
+    <string name="namespace">urn:x-cast:com.themotlcode.stikit</string>
 </resources>
