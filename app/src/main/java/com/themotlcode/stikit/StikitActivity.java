@@ -41,6 +41,8 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
 
     private static final int REQUEST_CODE = 1;
 
+    private static final float SWIPE_FRICTION = 3.0;
+
     private MediaRouter mMediaRouter;
     private MediaRouteSelector mMediaRouteSelector;
     private MediaRouter.Callback mMediaRouterCallback;
@@ -259,9 +261,10 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                                                             e);
                                                 }
 
+
                                                 // set the initial instructions
                                                 // on the receiver
-                                                sendMessage("Test");
+                                                //sendMessage("Test");
                                             } else {
                                                 Log.e(TAG,
                                                         "application could not launch");
@@ -395,13 +398,33 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         private static final String DEBUG_TAG = "Gestures";
 
         @Override
+        public void onLongPress(MotionEvent e) {
+            // pop up confirmation window to clear all notes
+            super.onLongPress(e);
+        }
+
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            // focus current note on device on cast
+            return super.onDoubleTap(e);
+        }
+
+        @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2,
                                float velocityX, float velocityY) {
             Log.d(DEBUG_TAG, "onFling: " + event1.toString()+event2.toString());
             Log.d(DEBUG_TAG, "velocityX: " + velocityX);
             Log.d(DEBUG_TAG, "velocityY: " + velocityY);
-            if (Math.abs(velocityY) > ViewConfiguration.get(getApplicationContext()).getScaledMinimumFlingVelocity()) {
+
+            float swipeVelocity = ViewConfiguration.get(getApplicationContext()).getScaledMinimumFlingVelocity() * SWIPE_FRICTION;
+            if (velocityX > swipeVelocity) {
+                // swipe sideways (navigate cards)
+            } else if (velocityY < 0 && velocityY < -swipeVelocity) {
+                // swipe up (add card to cast)
                 cast(null);
+            } else {
+                // swipe down (delete focused note on cast)
+                // OR delete current note being created
             }
             return true;
         }
