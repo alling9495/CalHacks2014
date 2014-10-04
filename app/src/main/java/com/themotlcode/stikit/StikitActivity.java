@@ -7,6 +7,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 
 public class StikitActivity extends Activity {
@@ -19,6 +23,17 @@ public class StikitActivity extends Activity {
         setContentView(R.layout.activity_stikit);
         castButton = (Button)findViewById(R.id.castButton);
         castText = (EditText)findViewById(R.id.castText);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        int errorCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if(errorCode != ConnectionResult.SUCCESS)
+        {
+            GooglePlayServicesUtil.getErrorDialog(errorCode,this,1001);
+        }
     }
 
 
@@ -44,5 +59,6 @@ public class StikitActivity extends Activity {
     public void cast(View v)
     {
         String text = castText.getText().toString();
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
 }
