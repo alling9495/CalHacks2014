@@ -9,5 +9,6 @@
     <item
         android:id="@+id/colorPicker"
         android:title="Color Picker"
+        android:icon="@drawable/ic_colorpicker_light"
         app:showAsAction="always"/>
 </menu>
