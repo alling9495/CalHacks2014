@@ -22,6 +22,7 @@
         android:layout_height="fill_parent"
         android:id="@+id/castText"
         android:background="@drawable/sticky_note_background"
+        android:alpha="0.3"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:text="Tap me baby. You know you want to ;)"

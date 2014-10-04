@@ -234,6 +234,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                                                                 + ", wasLaunched: "
                                                                 + wasLaunched);
                                                 mApplicationStarted = true;
+                                                styleCastConnect();
 
                                                 // Create the custom message
                                                 // channel
@@ -272,6 +273,16 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
             Log.d(TAG, "onConnectionSuspended");
             mWaitingForReconnect = true;
         }
+    }
+
+    // make the sticky note opaque when we connect to cast
+    private void styleCastConnect() {
+        castText.setAlpha(1f);
+    }
+
+    // make the sticky note transparent if we lose connection with cast
+    private void styleCastDisconnect() {
+        castText.setAlpha(0.3f);
     }
 
     /**
@@ -315,6 +326,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         mSelectedDevice = null;
         mWaitingForReconnect = false;
         mSessionId = null;
+        styleCastDisconnect();
     }
 
     /**
