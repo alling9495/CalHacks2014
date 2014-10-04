@@ -315,6 +315,7 @@ public class StikitActivity extends ActionBarActivity {
     private void sendMessage(String message) {
         if (mApiClient != null && mHelloWorldChannel != null) {
             try {
+                Log.e(TAG, "Message Sent!");
                 Cast.CastApi.sendMessage(mApiClient,
                         mHelloWorldChannel.getNamespace(), message)
                         .setResultCallback(new ResultCallback<Status>() {
