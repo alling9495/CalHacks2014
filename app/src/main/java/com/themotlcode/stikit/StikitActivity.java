@@ -41,7 +41,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
 
     private static final int REQUEST_CODE = 1;
 
-    private static final float SWIPE_FRICTION = 3.0;
+    private static final float SWIPE_FRICTION = 3.0f;
 
     private MediaRouter mMediaRouter;
     private MediaRouteSelector mMediaRouteSelector;
@@ -58,6 +58,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     //private Button castButton;
     private EditText castText;
     private GestureDetectorCompat gestureDetector;
+    private AlertDialog.Builder colorPicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,11 +73,10 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                                 .getString(R.string.app_id))).build();
         mMediaRouterCallback = new MyMediaRouterCallback();
         gestureDetector = new GestureDetectorCompat(this, new MyGestureListener());
-        AlertDialog.Builder colorPicker = new AlertDialog.Builder(this);
+        colorPicker = new AlertDialog.Builder(this);
         LayoutInflater inflater =  getLayoutInflater();
-        colorPicker.setView(inflater.inflate(R.layout.color_picker, null));
+        colorPicker.setView(inflater.inflate(R.layout.color_picker, null, false));
         colorPicker.setTitle("Stickit Color");
-        colorPicker.show();
     }
 
     @Override
@@ -114,6 +114,11 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        switch(id){
+            case R.id.colorPicker:
+                colorPicker.show();
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 
