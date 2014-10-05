@@ -191,18 +191,6 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                 });
                 break;
             case 1:
-                // LEFT
-                // translate to the left then translate new in from the right
-                castTextAndShadow.animate().translationX(-castTextAndShadow.getRight()).withEndAction(new Runnable() {
-                    @Override
-                    public void run() {
-                        castText.setText("");
-                        castTextAndShadow.setTranslationX(castTextAndShadow.getRight());
-                        castTextAndShadow.animate().translationX(0);
-                    }
-                });
-                break;
-            case 2:
                 // RIGHT
                 // translate to the right then translate new in from the left
                 castTextAndShadow.animate().translationX(castTextAndShadow.getRight()).withEndAction(new Runnable() {
@@ -210,6 +198,18 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                     public void run() {
                         castText.setText("");
                         castTextAndShadow.setTranslationX(-castTextAndShadow.getRight());
+                        castTextAndShadow.animate().translationX(0);
+                    }
+                });
+                break;
+            case 2:
+                // LEFT
+                // translate to the left then translate new in from the right
+                castTextAndShadow.animate().translationX(-castTextAndShadow.getRight()).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        castText.setText("");
+                        castTextAndShadow.setTranslationX(castTextAndShadow.getRight());
                         castTextAndShadow.animate().translationX(0);
                     }
                 });
@@ -396,11 +396,13 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     // make the sticky note opaque when we connect to cast
     private void styleCastConnect() {
         castTextAndShadow.setAlpha(1f);
+        castText.setEnabled(true);
     }
 
     // make the sticky note transparent if we lose connection with cast
     private void styleCastDisconnect() {
         castTextAndShadow.setAlpha(0.3f);
+        castText.setEnabled(false);
     }
 
     /**
@@ -523,6 +525,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
             Log.d(DEBUG_TAG, "onFling: " + event1.toString()+event2.toString());
             Log.d(DEBUG_TAG, "velocityX: " + velocityX);
             Log.d(DEBUG_TAG, "velocityY: " + velocityY);
+            boolean enabled = castText.isEnabled();
             castText.setEnabled(false);
             if(-velocityY > Math.abs(velocityX)) {
                 CastToScreen(null, castText.getText().toString(), color, 0);
@@ -536,7 +539,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
             else if (-velocityX > Math.abs(velocityY)) {
                 CastToScreen(null, "","",1); //LEFT
             }
-            castText.setEnabled(true);
+            castText.setEnabled(enabled);
             return true;
         }
     }
