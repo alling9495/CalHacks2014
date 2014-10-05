@@ -172,9 +172,18 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     }
 
     public void CastToScreen(View v, String message, String color, int command) {
-        sendMessage(smf.Message(message, color, command));
         // animate transition up then alpha fade in from origin
-        castTextAndShadow.animate().translationY(-castTextAndShadow.getHeight());
+        castTextAndShadow.animate().translationY(-castTextAndShadow.getBottom()).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                castTextAndShadow.setAlpha(0);
+                castTextAndShadow.setTranslationY(0);
+                castTextAndShadow.animate().alpha(1);
+            }
+        });
+        if (smf != null) {
+            sendMessage(smf.Message(message, color, command));
+        }
     }
 
     /**
