@@ -467,7 +467,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
             else if (velocityX > Math.abs(velocityY)) {
                 CastToScreen(null, "","",2); //RIGHT
             }
-            else if (-velocityX < Math.abs(velocityY)) {
+            else if (-velocityX > Math.abs(velocityY)) {
                 CastToScreen(null, "","",1); //LEFT
             }
             castText.setEnabled(true);
