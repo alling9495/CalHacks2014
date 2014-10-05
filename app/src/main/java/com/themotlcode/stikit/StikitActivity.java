@@ -63,6 +63,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     private String mSessionId;
     //private Button castButton;
     private EditText castText;
+    private ViewGroup castTextAndShadow;
     private GestureDetectorCompat gestureDetector;
     private StikitMessageFactory smf;
 
@@ -74,6 +75,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         setContentView(R.layout.activity_stikit);
         //castButton = (Button)findViewById(R.id.castButton);
         castText = (EditText)findViewById(R.id.castText);
+        castTextAndShadow = (ViewGroup) findViewById(R.id.castTextAndShadow);
         mMediaRouter = MediaRouter.getInstance(getApplicationContext());
         mMediaRouteSelector = new MediaRouteSelector.Builder()
                 .addControlCategory(
@@ -163,6 +165,8 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
 
     public void CastToScreen(View v, String message, String color) {
         sendMessage(smf.Message(message, color));
+        // animate castText translate up off screen then alpha fade back at origin
+        castTextAndShadow.animate().translationY(-castTextAndShadow.getHeight());
     }
 
     public void CastToScreen(View v, int command) {
@@ -332,14 +336,12 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
 
     // make the sticky note opaque when we connect to cast
     private void styleCastConnect() {
-        castText.setAlpha(1f);
-        findViewById(R.id.drop_shadow).setAlpha(1.0f);
+        castTextAndShadow.setAlpha(1f);
     }
 
     // make the sticky note transparent if we lose connection with cast
     private void styleCastDisconnect() {
-        castText.setAlpha(0.3f);
-        findViewById(R.id.drop_shadow).setAlpha(.3f);
+        castTextAndShadow.setAlpha(0.3f);
     }
 
     /**
@@ -453,7 +455,9 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         @Override
         public boolean onDoubleTap(MotionEvent e) {
             // focus current note on device on cast
-            return super.onDoubleTap(e);
+            // TODO remove after done testing on shitty emulator
+            CastToScreen(null, castText.getText().toString(), color);
+            return true;
         }
 
         @Override
