@@ -395,13 +395,13 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
 
     // make the sticky note opaque when we connect to cast
     private void styleCastConnect() {
-        castTextAndShadow.setAlpha(1f);
+        //castTextAndShadow.setAlpha(1f);
         castText.setEnabled(true);
     }
 
     // make the sticky note transparent if we lose connection with cast
     private void styleCastDisconnect() {
-        castTextAndShadow.setAlpha(0.3f);
+        //castTextAndShadow.setAlpha(0.3f);
         castText.setEnabled(false);
     }
 
@@ -534,10 +534,10 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                 CastToScreen(null, "", "", 3); //DELETE
             }
             else if (velocityX > Math.abs(velocityY)) {
-                CastToScreen(null, "","",2); //RIGHT
+                CastToScreen(null, "","",1); //LEFT
             }
             else if (-velocityX > Math.abs(velocityY)) {
-                CastToScreen(null, "","",1); //LEFT
+                CastToScreen(null, "","",2); //RIGHT
             }
             castText.setEnabled(enabled);
             return true;
