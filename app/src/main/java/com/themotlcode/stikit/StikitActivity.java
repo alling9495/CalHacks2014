@@ -58,7 +58,6 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     private boolean mApplicationStarted;
     private boolean mWaitingForReconnect;
     private String mSessionId;
-    //private Button castButton;
     private EditText castText;
     private ViewGroup castTextAndShadow;
     private GestureDetectorCompat gestureDetector;
@@ -71,7 +70,6 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stikit);
-        //castButton = (Button)findViewById(R.id.castButton);
         castText = (EditText)findViewById(R.id.castText);
         castTextAndShadow = (ViewGroup)findViewById(R.id.castTextAndShadow);
         mMediaRouter = MediaRouter.getInstance(getApplicationContext());
@@ -82,23 +80,12 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         mMediaRouterCallback = new MyMediaRouterCallback();
         gestureDetector = new GestureDetectorCompat(this, new MyGestureListener());
 
-        /*
         //TODO remove after testing animations on emulator
         Button temp = (Button) findViewById(R.id.temp);
         temp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CastToScreen(null, castText.getText().toString(), color, 0);
-            }
-        });
-        */
-
-        castTextAndShadow.setOnDragListener(new View.OnDragListener() {
-            @Override
-            public boolean onDrag(View view, DragEvent dragEvent) {
-                castTextAndShadow.setTranslationX(dragEvent.getX());
-                castTextAndShadow.setTranslationY(dragEvent.getY());
-                return true;
             }
         });
     }
@@ -182,7 +169,61 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     }
 
     public void CastToScreen(View v, String message, String color, int command) {
-        sendMessage(smf.Message(message, color, command));
+        if (smf != null) {
+            sendMessage(smf.Message(message, color, command));
+        }
+
+        switch (command) {
+            case 0:
+                // UP
+                // transition up then alpha fade in from origin
+                castTextAndShadow.animate().translationY(-castTextAndShadow.getBottom()).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        castText.setText(StikitActivity.this.getResources().getString(R.string.initial_note));
+                        castTextAndShadow.setAlpha(0);
+                        castTextAndShadow.setTranslationY(0);
+                        castTextAndShadow.animate().alpha(1);
+                    }
+                });
+                break;
+            case 1:
+                // LEFT
+                // translate to the left then translate new in from the right
+                castTextAndShadow.animate().translationX(-castTextAndShadow.getRight()).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        castText.setText("");
+                        castText.setTranslationX(castTextAndShadow.getRight());
+                        castTextAndShadow.animate().translationX(0);
+                    }
+                });
+                break;
+            case 2:
+                // RIGHT
+                // translate to the right then translate new in from the left
+                castTextAndShadow.animate().translationX(castTextAndShadow.getRight()).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        castText.setText("");
+                        castText.setTranslationX(-castTextAndShadow.getRight());
+                        castTextAndShadow.animate().translationX(0);
+                    }
+                });
+                break;
+            case 3:
+                // DELETE
+                // translate down and fade out at the same time
+                castTextAndShadow.animate().alpha(0).translationY(600).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        castText.setText("");
+                        castTextAndShadow.setTranslationY(0);
+                        castTextAndShadow.setAlpha(1);
+                    }
+                });
+                break;
+        }
     }
 
     /**
