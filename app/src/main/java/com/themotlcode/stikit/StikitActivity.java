@@ -1,8 +1,5 @@
 package com.themotlcode.stikit;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.gesture.GestureOverlayView;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.GestureDetectorCompat;
@@ -22,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.app.Dialog;
 
@@ -66,7 +64,8 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     private GestureDetectorCompat gestureDetector;
     private StikitMessageFactory smf;
 
-    public static String color = "#FFFFFF";
+    public static String color = "#D0D0D0";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +81,6 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                                 .getString(R.string.app_id))).build();
         mMediaRouterCallback = new MyMediaRouterCallback();
         gestureDetector = new GestureDetectorCompat(this, new MyGestureListener());
-        LayoutInflater inflater =  getLayoutInflater();
 
         /*
         //TODO remove after testing animations on emulator
