@@ -336,14 +336,12 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
 
     // make the sticky note opaque when we connect to cast
     private void styleCastConnect() {
-        castText.setAlpha(1f);
-        findViewById(R.id.drop_shadow).setAlpha(1.0f);
+        castTextAndShadow.setAlpha(1f);
     }
 
     // make the sticky note transparent if we lose connection with cast
     private void styleCastDisconnect() {
-        castText.setAlpha(0.3f);
-        findViewById(R.id.drop_shadow).setAlpha(.3f);
+        castTextAndShadow.setAlpha(0.3f);
     }
 
     /**
