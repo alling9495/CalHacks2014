@@ -328,12 +328,12 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
 
     // make the sticky note opaque when we connect to cast
     private void styleCastConnect() {
-        castText.setAlpha(1f);
+        castTextAndShadow.setAlpha(1f);
     }
 
     // make the sticky note transparent if we lose connection with cast
     private void styleCastDisconnect() {
-        castText.setAlpha(0.3f);
+        castTextAndShadow.setAlpha(0.3f);
     }
 
     /**
@@ -447,7 +447,9 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         @Override
         public boolean onDoubleTap(MotionEvent e) {
             // focus current note on device on cast
-            return super.onDoubleTap(e);
+            // TODO remove after done testing on shitty emulator
+            CastToScreen(null, castText.getText().toString(), color, 0);
+            return true;
         }
 
         @Override
