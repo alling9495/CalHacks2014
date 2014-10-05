@@ -1,5 +1,7 @@
 package com.themotlcode.stikit;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.GestureDetectorCompat;
@@ -186,7 +188,10 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         // greater velocity -> less duration
         int duration;
         int vel = (int) velocity / getResources().getDisplayMetrics().densityDpi; // 0 <= vel <= 50
-        if (vel < 5) {
+        if (vel == 0) {
+            // don't animate
+            duration = 0;
+        } else if (vel < 5) {
             // super gentle
             duration = 600;
         } else if (vel < 10) {
@@ -539,7 +544,18 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         @Override
         public void onLongPress(MotionEvent e) {
             // pop up confirmation window to clear all notes
-            super.onLongPress(e);
+            //super.onLongPress(e);
+            new AlertDialog.Builder(StikitActivity.this)
+                .setTitle("Delete All Notes?")
+                .setMessage("Do you wish to delete all the notes from the big screen?")
+                .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        CastToScreen(null, "", "", 4, 0);
+                    }
+                })
+                .setNegativeButton("CANCEL", null)
+                .show();
         }
 
         @Override
