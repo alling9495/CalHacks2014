@@ -72,6 +72,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         setContentView(R.layout.activity_stikit);
         castText = (EditText)findViewById(R.id.castText);
         castTextAndShadow = (ViewGroup)findViewById(R.id.castTextAndShadow);
+        castTextAndShadow.setEnabled(false);
         mMediaRouter = MediaRouter.getInstance(getApplicationContext());
         mMediaRouteSelector = new MediaRouteSelector.Builder()
                 .addControlCategory(
