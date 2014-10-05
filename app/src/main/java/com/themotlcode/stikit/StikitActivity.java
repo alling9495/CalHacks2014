@@ -463,7 +463,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                                     Log.e(TAG, "Sending message failed");
                                 }
                                 else {
-                                    Toast.makeText(StikitActivity.this, "Stuck it!", Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(StikitActivity.this, "Stuck it!", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
