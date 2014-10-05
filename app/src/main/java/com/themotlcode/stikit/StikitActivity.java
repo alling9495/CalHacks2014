@@ -63,7 +63,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     private EditText castText;
     private GestureDetectorCompat gestureDetector;
 
-    public static String color;
+    public static String color = "$FFFFFF";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -395,7 +395,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                                     Log.e(TAG, "Sending message failed");
                                 }
                                 else {
-                                    Toast.makeText(StikitActivity.this, message, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(StikitActivity.this, "Stuck it!", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
