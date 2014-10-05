@@ -29,4 +29,9 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/drop_shadow"
+        android:layout_alignBottom="@id/castText" />
 </RelativeLayout>
