@@ -11,20 +11,21 @@ public class StikitMessageFactory {
     /* Empty constructor */
     public StikitMessageFactory() {}
 
-    public String Message(String message, String color) {
-        return stikitMessageConstruct(message, color).toString();
+    public String Message(String message, String color, int command) {
+        return stikitMessageConstruct(message, color, command).toString();
     }
 
-    public String Command(int command) {
+    /*public String Command(int command) {
         return stikitCommandConstruct(command).toString();
-    }
-    private JSONObject stikitMessageConstruct(String message, String color) {
+    }*/
+    private JSONObject stikitMessageConstruct(String message, String color, int command) {
 
         JSONObject messageObj = new JSONObject();
 
         try {
             messageObj.put("text", message);
             messageObj.put("colorInHex", color);
+            messageObj.put("command", command);
         }
         catch (org.json.JSONException e) {
             Log.d(TAG, e.toString());
@@ -36,7 +37,7 @@ public class StikitMessageFactory {
         Right: 1
         Delete: 2
      */
-    private JSONObject stikitCommandConstruct(int command) {
+    /*private JSONObject stikitCommandConstruct(int command) {
         JSONObject commandObj = new JSONObject();
 
         try {
@@ -47,6 +48,6 @@ public class StikitMessageFactory {
         }
         return commandObj;
     }
-
+*/
 
 }

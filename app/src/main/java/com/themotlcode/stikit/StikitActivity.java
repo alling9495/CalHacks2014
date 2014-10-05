@@ -160,13 +160,10 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         return super.onOptionsItemSelected(item);
     }
 
-    public void CastToScreen(View v, String message, String color) {
-        sendMessage(smf.Message(message, color));
+    public void CastToScreen(View v, String message, String color, int command) {
+        sendMessage(smf.Message(message, color, command));
     }
 
-    public void CastToScreen(View v, int command) {
-        sendMessage(smf.Command(command));
-    }
     /**
      * Callback for MediaRouter events
      */
@@ -460,16 +457,16 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
             Log.d(DEBUG_TAG, "velocityY: " + velocityY);
             castText.setEnabled(false);
             if(-velocityY > Math.abs(velocityX)) {
-                CastToScreen(null, castText.getText().toString(), color);
+                CastToScreen(null, castText.getText().toString(), color, 0);
             }
             else if (velocityY > Math.abs(velocityX)) {
-                CastToScreen(null, 2); // DELETE
+                CastToScreen(null, "","",3); //DELETE
             }
             else if (velocityX > Math.abs(velocityY)) {
-                CastToScreen(null, 1); //RIGHT
+                CastToScreen(null, "","",2); //RIGHT
             }
-            else if (velocityX < Math.abs(velocityY)) {
-                CastToScreen(null, 0); //LEFT
+            else if (-velocityX < Math.abs(velocityY)) {
+                CastToScreen(null, "","",1); //LEFT
             }
             castText.setEnabled(true);
             return true;
