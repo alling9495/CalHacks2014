@@ -455,6 +455,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
             Log.d(DEBUG_TAG, "velocityY: " + velocityY);
             castText.setEnabled(false);
             float swipeVelocity = ViewConfiguration.get(getApplicationContext()).getScaledMinimumFlingVelocity() * SWIPE_FRICTION;
+            Log.d(DEBUG_TAG, "swipeVelocity: " + swipeVelocity);
             if (velocityX > swipeVelocity) {
                 // swipe sideways (navigate cards)
             } else if (velocityY < 0 && velocityY < -swipeVelocity) {
