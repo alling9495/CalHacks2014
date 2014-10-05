@@ -3,6 +3,7 @@ package com.themotlcode.stikit;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.gesture.GestureOverlayView;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.GestureDetectorCompat;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.ViewPropertyAnimator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -79,7 +81,6 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                                 .getString(R.string.app_id))).build();
         mMediaRouterCallback = new MyMediaRouterCallback();
         gestureDetector = new GestureDetectorCompat(this, new MyGestureListener());
-        LayoutInflater inflater =  getLayoutInflater();
     }
 
     @Override
@@ -332,11 +333,13 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     // make the sticky note opaque when we connect to cast
     private void styleCastConnect() {
         castText.setAlpha(1f);
+        findViewById(R.id.drop_shadow).setAlpha(1.0f);
     }
 
     // make the sticky note transparent if we lose connection with cast
     private void styleCastDisconnect() {
         castText.setAlpha(0.3f);
+        findViewById(R.id.drop_shadow).setAlpha(.3f);
     }
 
     /**

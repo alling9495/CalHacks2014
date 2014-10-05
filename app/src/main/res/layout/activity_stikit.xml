@@ -30,6 +30,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
     <View
+        android:id="@+id/drop_shadow"
         android:layout_width="fill_parent"
         android:layout_height="5dp"
         android:background="@drawable/drop_shadow"
