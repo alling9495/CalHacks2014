@@ -62,6 +62,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     //private Button castButton;
     private EditText castText;
     private GestureDetectorCompat gestureDetector;
+    private StikitMessageFactory smf;
 
     public static String color;
 
@@ -95,6 +96,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                 MediaRouter.CALLBACK_FLAG_REQUEST_DISCOVERY);
 
         castText.setOnTouchListener(this);
+        smf = new StikitMessageFactory();
     }
     @Override
     protected void onPause() {
@@ -158,8 +160,9 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         return super.onOptionsItemSelected(item);
     }
 
-    public void cast(View v) {
-        String text = castText.getText().toString();
+    public void CastToScreen(View v, String message, String color) {
+        String message = castText.getText().toString();
+        String color = 
         sendMessage(text);
     }
     /**
@@ -454,9 +457,11 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
             Log.d(DEBUG_TAG, "velocityX: " + velocityX);
             Log.d(DEBUG_TAG, "velocityY: " + velocityY);
             castText.setEnabled(false);
-            if(-velocityY > Math.abs(velocityX))
-            {
+            if(-velocityY > Math.abs(velocityX)) {
                 cast(null);
+            }
+            else if (velocityY > Math.abs(velocityX)) {
+
             }
             castText.setEnabled(true);
             return true;
