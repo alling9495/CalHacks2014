@@ -65,7 +65,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     private GestureDetectorCompat gestureDetector;
     private StikitMessageFactory smf;
 
-    public static String color = "$FFFFFF";
+    public static String color = "#FFFFFF";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
