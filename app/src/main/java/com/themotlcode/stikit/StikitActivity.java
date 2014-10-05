@@ -191,18 +191,6 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                 });
                 break;
             case 1:
-                // LEFT
-                // translate to the left then translate new in from the right
-                castTextAndShadow.animate().translationX(-castTextAndShadow.getRight()).withEndAction(new Runnable() {
-                    @Override
-                    public void run() {
-                        castText.setText("");
-                        castTextAndShadow.setTranslationX(castTextAndShadow.getRight());
-                        castTextAndShadow.animate().translationX(0);
-                    }
-                });
-                break;
-            case 2:
                 // RIGHT
                 // translate to the right then translate new in from the left
                 castTextAndShadow.animate().translationX(castTextAndShadow.getRight()).withEndAction(new Runnable() {
@@ -210,6 +198,18 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                     public void run() {
                         castText.setText("");
                         castTextAndShadow.setTranslationX(-castTextAndShadow.getRight());
+                        castTextAndShadow.animate().translationX(0);
+                    }
+                });
+                break;
+            case 2:
+                // LEFT
+                // translate to the left then translate new in from the right
+                castTextAndShadow.animate().translationX(-castTextAndShadow.getRight()).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        castText.setText("");
+                        castTextAndShadow.setTranslationX(castTextAndShadow.getRight());
                         castTextAndShadow.animate().translationX(0);
                     }
                 });
