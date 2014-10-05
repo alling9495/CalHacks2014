@@ -82,6 +82,15 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         mMediaRouterCallback = new MyMediaRouterCallback();
         gestureDetector = new GestureDetectorCompat(this, new MyGestureListener());
         LayoutInflater inflater =  getLayoutInflater();
+
+        //TODO remove after testing animations on emulator
+        Button temp = (Button) findViewById(R.id.temp);
+        temp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CastToScreen(null, castText.getText().toString(), color, 0);
+            }
+        });
     }
 
     @Override
@@ -164,6 +173,8 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
 
     public void CastToScreen(View v, String message, String color, int command) {
         sendMessage(smf.Message(message, color, command));
+        // animate transition up then alpha fade in from origin
+        castTextAndShadow.animate().translationY(-castTextAndShadow.getHeight());
     }
 
     /**
@@ -450,10 +461,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         @Override
         public boolean onDoubleTap(MotionEvent e) {
             // focus current note on device on cast
-            Log.d(TAG, "double tapped");
-            // TODO remove after done testing on shitty emulator
-            CastToScreen(null, castText.getText().toString(), color, 0);
-            return true;
+            return super.onDoubleTap(e);
         }
 
         @Override
@@ -466,7 +474,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                 CastToScreen(null, castText.getText().toString(), color, 0);
             }
             else if (velocityY > Math.abs(velocityX)) {
-                CastToScreen(null, "","",3); //DELETE
+                CastToScreen(null, "", "", 3); //DELETE
             }
             else if (velocityX > Math.abs(velocityY)) {
                 CastToScreen(null, "","",2); //RIGHT
