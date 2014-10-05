@@ -45,7 +45,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
 
     private static final int REQUEST_CODE = 1;
 
-    private static final float SWIPE_FRICTION = 3.0f;
+    private static final float SWIPE_FRICTION = 2.0f;
 
     private MediaRouter mMediaRouter;
     private MediaRouteSelector mMediaRouteSelector;
@@ -62,6 +62,8 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     //private Button castButton;
     private EditText castText;
     private GestureDetectorCompat gestureDetector;
+
+    public static String color;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,7 +150,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         switch(id){
             case R.id.colorPicker:
                 // custom dialog
-                final ColorPickerDialog colorPickerDialog = new ColorPickerDialog(this);
+                final ColorPickerDialog colorPickerDialog = new ColorPickerDialog(this, castText);
 
                 colorPickerDialog.show();
             break;
@@ -158,7 +160,6 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
 
     public void cast(View v) {
         String text = castText.getText().toString();
-        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
         sendMessage(text);
     }
     /**
@@ -382,7 +383,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
      *
      * @param message
      */
-    private void sendMessage(String message) {
+    private void sendMessage(final String message) {
         if (mApiClient != null && mHelloWorldChannel != null) {
             try {
                 Cast.CastApi.sendMessage(mApiClient,
@@ -393,14 +394,14 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                                 if (!result.isSuccess()) {
                                     Log.e(TAG, "Sending message failed");
                                 }
+                                else {
+                                    Toast.makeText(StikitActivity.this, message, Toast.LENGTH_LONG).show();
+                                }
                             }
                         });
             } catch (Exception e) {
                 Log.e(TAG, "Exception while sending message", e);
             }
-        } else {
-            Toast.makeText(StikitActivity.this, message, Toast.LENGTH_SHORT)
-                    .show();
         }
     }
 
@@ -448,21 +449,14 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         }
 
         @Override
-        public boolean onFling(MotionEvent event1, MotionEvent event2,
-                               float velocityX, float velocityY) {
+        public boolean onFling(MotionEvent event1, MotionEvent event2, float velocityX, float velocityY) {
             Log.d(DEBUG_TAG, "onFling: " + event1.toString()+event2.toString());
             Log.d(DEBUG_TAG, "velocityX: " + velocityX);
             Log.d(DEBUG_TAG, "velocityY: " + velocityY);
             castText.setEnabled(false);
-            float swipeVelocity = ViewConfiguration.get(getApplicationContext()).getScaledMinimumFlingVelocity() * SWIPE_FRICTION;
-            if (velocityX > swipeVelocity) {
-                // swipe sideways (navigate cards)
-            } else if (velocityY < 0 && velocityY < -swipeVelocity) {
-                // swipe up (add card to cast)
+            if(-velocityY > Math.abs(velocityX))
+            {
                 cast(null);
-            } else {
-                // swipe down (delete focused note on cast)
-                // OR delete current note being created
             }
             castText.setEnabled(true);
             return true;
