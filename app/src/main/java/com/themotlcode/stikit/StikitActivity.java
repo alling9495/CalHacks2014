@@ -63,6 +63,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     private ViewGroup castTextAndShadow;
     private GestureDetectorCompat gestureDetector;
     private StikitMessageFactory smf;
+    private boolean connected;
 
     public static String color = "#EEEE22";
 
@@ -109,8 +110,11 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
 
         castText.setOnTouchListener(this);
         smf = new StikitMessageFactory();
-        castText.setEnabled(false);
-        castText.setText(getResources().getString(R.string.initial_note));
+        if (connected) {
+            styleCastConnect();
+        } else {
+            styleCastDisconnect();
+        }
     }
     @Override
     protected void onPause() {
@@ -418,6 +422,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     private void styleCastConnect() {
         //castTextAndShadow.setAlpha(1f);
         castText.setEnabled(true);
+        connected = true;
     }
 
     // make the sticky note transparent if we lose connection with cast
@@ -425,6 +430,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         //castTextAndShadow.setAlpha(0.3f);
         castText.setEnabled(false);
         castText.setText(getResources().getString(R.string.initial_note));
+        connected = false;
     }
 
     /**
