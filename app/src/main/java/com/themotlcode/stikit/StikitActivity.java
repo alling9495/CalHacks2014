@@ -176,6 +176,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         castTextAndShadow.animate().translationY(-castTextAndShadow.getBottom()).withEndAction(new Runnable() {
             @Override
             public void run() {
+                castText.setText(StikitActivity.this.getResources().getString(R.string.initial_note));
                 castTextAndShadow.setAlpha(0);
                 castTextAndShadow.setTranslationY(0);
                 castTextAndShadow.animate().alpha(1);
