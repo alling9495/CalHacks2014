@@ -542,24 +542,20 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         private static final String DEBUG_TAG = "Gestures";
 
         @Override
-        public void onLongPress(MotionEvent e) {
+        public boolean onDoubleTap(MotionEvent e) {
             // pop up confirmation window to clear all notes
             //super.onLongPress(e);
             new AlertDialog.Builder(StikitActivity.this)
-                .setTitle("Delete All Notes?")
-                .setMessage("Do you wish to delete all the notes from the big screen?")
-                .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        CastToScreen(null, "", "", 4, 0);
-                    }
-                })
-                .setNegativeButton("CANCEL", null)
-                .show();
-        }
-
-        @Override
-        public boolean onDoubleTap(MotionEvent e) {
+                    .setTitle("Delete All Notes?")
+                    .setMessage("Do you wish to delete all the notes from the big screen?")
+                    .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            CastToScreen(null, "", "", 4, 0);
+                        }
+                    })
+                    .setNegativeButton("CANCEL", null)
+                    .show();
             // focus current note on device on cast
             return super.onDoubleTap(e);
         }
