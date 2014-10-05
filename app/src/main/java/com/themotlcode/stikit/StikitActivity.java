@@ -434,6 +434,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
+        Log.d(TAG, "touch me baby");
         return this.gestureDetector.onTouchEvent(motionEvent);
     }
 
@@ -449,6 +450,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         @Override
         public boolean onDoubleTap(MotionEvent e) {
             // focus current note on device on cast
+            Log.d(TAG, "double tapped");
             // TODO remove after done testing on shitty emulator
             CastToScreen(null, castText.getText().toString(), color, 0);
             return true;
