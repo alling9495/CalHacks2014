@@ -37,35 +37,35 @@ public class ColorPickerDialog extends Dialog implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.imageWhite:
-                StikitActivity.color = context.getResources().getString(R.color.white);
+                StikitActivity.color = "#D0D0D0";
                 editText.setBackground(new ColorDrawable(context.getResources().getColor(R.color.white)));
                 break;
             case R.id.imageAqua:
-                StikitActivity.color = context.getResources().getString(R.color.aqua);
+                StikitActivity.color = "#77DDBB";
                 editText.setBackground(new ColorDrawable(context.getResources().getColor(R.color.aqua)));
                 break;
             case R.id.imageBlue:
-                StikitActivity.color = context.getResources().getString(R.color.blue);
+                StikitActivity.color = "#66CCDD";
                 editText.setBackground(new ColorDrawable(context.getResources().getColor(R.color.blue)));
                 break;
             case R.id.imageGreen:
-                StikitActivity.color = context.getResources().getString(R.color.green);
+                StikitActivity.color = "#BBE535";
                 editText.setBackground(new ColorDrawable(context.getResources().getColor(R.color.green)));
                 break;
             case R.id.imageGrey:
-                StikitActivity.color = context.getResources().getString(R.color.grey);
+                StikitActivity.color = "#B5C5C5";
                 editText.setBackground(new ColorDrawable(context.getResources().getColor(R.color.grey)));
                 break;
             case R.id.imageOrange:
-                StikitActivity.color = context.getResources().getString(R.color.orange);
+                StikitActivity.color = "#FFBB22";
                 editText.setBackground(new ColorDrawable(context.getResources().getColor(R.color.orange)));
                 break;
             case R.id.imageRed:
-                StikitActivity.color = context.getResources().getString(R.color.red);
+                StikitActivity.color = "#F56545";
                 editText.setBackground(new ColorDrawable(context.getResources().getColor(R.color.red)));
                 break;
             case R.id.imageYellow:
-                StikitActivity.color = context.getResources().getString(R.color.yellow);
+                StikitActivity.color = "#EEEE22";
                 editText.setBackground(new ColorDrawable(context.getResources().getColor(R.color.yellow)));
                 break;
         }
