@@ -5,6 +5,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.MediaRouteActionProvider;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.Gravity;
@@ -173,16 +174,34 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         return super.onOptionsItemSelected(item);
     }
 
-    public void CastToScreen(View v, String message, String color, int command) {
+    public void CastToScreen(View v, String message, String color, int command, float velocity) {
         if (smf != null) {
             sendMessage(smf.Message(message, color, command));
         }
+
+        // greater velocity -> less duration
+        int duration;
+        int vel = (int) velocity / getResources().getDisplayMetrics().densityDpi; // 0 <= vel <= 50
+        if (vel < 5) {
+            // super gentle
+            duration = 600;
+        } else if (vel < 10) {
+            // lazy gentle
+            duration = 400;
+        } else if (vel < 25) {
+            // casual
+            duration = 200;
+        } else {
+            // aggresive (with index finger)
+            duration = 100;
+        }
+        Log.d(TAG, "duration: "+duration+"\tvel: "+vel+"\tvelocity: "+velocity);
 
         switch (command) {
             case 0:
                 // UP
                 // transition up then alpha fade in from origin
-                castTextAndShadow.animate().translationY(-castTextAndShadow.getBottom()).withEndAction(new Runnable() {
+                castTextAndShadow.animate().setDuration(duration).translationY(-castTextAndShadow.getBottom()).withEndAction(new Runnable() {
                     @Override
                     public void run() {
                         castText.setText("");
@@ -195,7 +214,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
             case 1:
                 // RIGHT
                 // translate to the right then translate new in from the left
-                castTextAndShadow.animate().translationX(castTextAndShadow.getRight()).withEndAction(new Runnable() {
+                castTextAndShadow.animate().setDuration(duration).translationX(castTextAndShadow.getRight()).withEndAction(new Runnable() {
                     @Override
                     public void run() {
                         castText.setText("");
@@ -207,7 +226,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
             case 2:
                 // LEFT
                 // translate to the left then translate new in from the right
-                castTextAndShadow.animate().translationX(-castTextAndShadow.getRight()).withEndAction(new Runnable() {
+                castTextAndShadow.animate().setDuration(duration).translationX(-castTextAndShadow.getRight()).withEndAction(new Runnable() {
                     @Override
                     public void run() {
                         castText.setText("");
@@ -219,7 +238,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
             case 3:
                 // DELETE
                 // "crumple" the card
-                castTextAndShadow.animate().scaleX(0).scaleY(0).withEndAction(new Runnable() {
+                castTextAndShadow.animate().setDuration(duration).scaleX(0).scaleY(0).withEndAction(new Runnable() {
                     @Override
                     public void run() {
                         castText.setText("");
@@ -531,16 +550,16 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
             boolean enabled = castText.isEnabled();
             castText.setEnabled(false);
             if(-velocityY > Math.abs(velocityX)) {
-                CastToScreen(null, castText.getText().toString(), color, 0);
+                CastToScreen(null, castText.getText().toString(), color,0,  Math.abs(velocityY));
             }
             else if (velocityY > Math.abs(velocityX)) {
-                CastToScreen(null, "", "", 3); //DELETE
+                CastToScreen(null, "", "", 3, Math.abs(velocityY)); //DELETE
             }
             else if (velocityX > Math.abs(velocityY)) {
-                CastToScreen(null, "","",1); //LEFT
+                CastToScreen(null, "","",1, Math.abs(velocityX)); //LEFT
             }
             else if (-velocityX > Math.abs(velocityY)) {
-                CastToScreen(null, "","",2); //RIGHT
+                CastToScreen(null, "","",2, Math.abs(velocityX)); //RIGHT
             }
             castText.setEnabled(enabled);
             return true;
