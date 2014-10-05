@@ -80,14 +80,16 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         mMediaRouterCallback = new MyMediaRouterCallback();
         gestureDetector = new GestureDetectorCompat(this, new MyGestureListener());
 
+        /*
         //TODO remove after testing animations on emulator
         Button temp = (Button) findViewById(R.id.temp);
         temp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CastToScreen(null, castText.getText().toString(), color, 0);
+                CastToScreen(null, castText.getText().toString(), color, 3);
             }
         });
+        */
     }
 
     @Override
@@ -194,7 +196,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                     @Override
                     public void run() {
                         castText.setText("");
-                        castText.setTranslationX(castTextAndShadow.getRight());
+                        castTextAndShadow.setTranslationX(castTextAndShadow.getRight());
                         castTextAndShadow.animate().translationX(0);
                     }
                 });
@@ -206,20 +208,22 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                     @Override
                     public void run() {
                         castText.setText("");
-                        castText.setTranslationX(-castTextAndShadow.getRight());
+                        castTextAndShadow.setTranslationX(-castTextAndShadow.getRight());
                         castTextAndShadow.animate().translationX(0);
                     }
                 });
                 break;
             case 3:
                 // DELETE
-                // translate down and fade out at the same time
-                castTextAndShadow.animate().alpha(0).translationY(600).withEndAction(new Runnable() {
+                // "crumple" the card
+                castTextAndShadow.animate().scaleX(0).scaleY(0).withEndAction(new Runnable() {
                     @Override
                     public void run() {
                         castText.setText("");
-                        castTextAndShadow.setTranslationY(0);
-                        castTextAndShadow.setAlpha(1);
+                        castTextAndShadow.setScaleX(1);
+                        castTextAndShadow.setScaleY(1);
+                        castTextAndShadow.setAlpha(0);
+                        castTextAndShadow.animate().alpha(1);
                     }
                 });
                 break;
