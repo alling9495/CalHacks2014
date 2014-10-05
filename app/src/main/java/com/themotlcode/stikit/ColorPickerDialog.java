@@ -20,7 +20,7 @@ public class ColorPickerDialog extends Dialog implements View.OnClickListener {
         super(context);
         this.context = context;
         this.editText = editText;
-        setTitle("Stickit Color");
+        setTitle("Stikit Color");
         setContentView(R.layout.color_picker);
 
         findViewById(R.id.imageWhite).setOnClickListener(this);
