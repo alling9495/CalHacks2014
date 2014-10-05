@@ -15,7 +15,7 @@ public class StikitMessageFactory {
         return stikitMessageConstruct(message, color).toString();
     }
 
-    public String Commmand(int command) {
+    public String Command(int command) {
         return stikitCommandConstruct(command).toString();
     }
     private JSONObject stikitMessageConstruct(String message, String color) {
