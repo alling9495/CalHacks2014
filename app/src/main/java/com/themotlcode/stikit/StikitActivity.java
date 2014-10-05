@@ -61,6 +61,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     private String mSessionId;
     //private Button castButton;
     private EditText castText;
+    private ViewGroup castTextAndShadow;
     private GestureDetectorCompat gestureDetector;
     private StikitMessageFactory smf;
 
@@ -72,6 +73,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         setContentView(R.layout.activity_stikit);
         //castButton = (Button)findViewById(R.id.castButton);
         castText = (EditText)findViewById(R.id.castText);
+        castTextAndShadow = (ViewGroup)findViewById(R.id.castTextAndShadow);
         mMediaRouter = MediaRouter.getInstance(getApplicationContext());
         mMediaRouteSelector = new MediaRouteSelector.Builder()
                 .addControlCategory(
