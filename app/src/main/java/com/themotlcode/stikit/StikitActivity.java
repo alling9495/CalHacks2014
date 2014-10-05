@@ -9,6 +9,7 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.MediaRouteActionProvider;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -93,6 +94,15 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
             }
         });
         */
+
+        castTextAndShadow.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View view, DragEvent dragEvent) {
+                castTextAndShadow.setTranslationX(dragEvent.getX());
+                castTextAndShadow.setTranslationY(dragEvent.getY());
+                return true;
+            }
+        });
     }
 
     @Override
@@ -174,19 +184,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     }
 
     public void CastToScreen(View v, String message, String color, int command) {
-        if (smf != null) {
-            sendMessage(smf.Message(message, color, command));
-            // animate transition up then alpha fade in from origin
-            castTextAndShadow.animate().translationY(-castTextAndShadow.getBottom()).withEndAction(new Runnable() {
-                @Override
-                public void run() {
-                    castText.setText(StikitActivity.this.getResources().getString(R.string.initial_note));
-                    castTextAndShadow.setAlpha(0);
-                    castTextAndShadow.setTranslationY(0);
-                    castTextAndShadow.animate().alpha(1);
-                }
-            });
-        }
+        sendMessage(smf.Message(message, color, command));
     }
 
     /**
