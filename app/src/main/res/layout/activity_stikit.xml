@@ -2,15 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StikitActivity">
+    tools:context=".StikitActivity"
+    android:background="@drawable/grey">
 
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="794dp"
-            android:layout_height="1932dp"
+            android:layout_width="397dp"
+            android:layout_height="966dp"
             android:layout_gravity="center"
             android:src="@drawable/grey" />
 

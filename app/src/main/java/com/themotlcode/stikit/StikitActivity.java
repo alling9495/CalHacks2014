@@ -108,6 +108,8 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
 
         castText.setOnTouchListener(this);
         smf = new StikitMessageFactory();
+        castText.setEnabled(false);
+        castText.setText(getResources().getString(R.string.initial_note));
     }
     @Override
     protected void onPause() {
@@ -183,7 +185,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                 castTextAndShadow.animate().translationY(-castTextAndShadow.getBottom()).withEndAction(new Runnable() {
                     @Override
                     public void run() {
-                        castText.setText(StikitActivity.this.getResources().getString(R.string.initial_note));
+                        castText.setText("");
                         castTextAndShadow.setAlpha(0);
                         castTextAndShadow.setTranslationY(0);
                         castTextAndShadow.animate().alpha(1);
@@ -403,6 +405,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     private void styleCastDisconnect() {
         //castTextAndShadow.setAlpha(0.3f);
         castText.setEnabled(false);
+        castText.setText(getResources().getString(R.string.initial_note));
     }
 
     /**
