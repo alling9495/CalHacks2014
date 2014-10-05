@@ -83,6 +83,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
         gestureDetector = new GestureDetectorCompat(this, new MyGestureListener());
         LayoutInflater inflater =  getLayoutInflater();
 
+        /*
         //TODO remove after testing animations on emulator
         Button temp = (Button) findViewById(R.id.temp);
         temp.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +92,7 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
                 CastToScreen(null, castText.getText().toString(), color, 0);
             }
         });
+        */
     }
 
     @Override
@@ -172,18 +174,18 @@ public class StikitActivity extends ActionBarActivity implements View.OnTouchLis
     }
 
     public void CastToScreen(View v, String message, String color, int command) {
-        // animate transition up then alpha fade in from origin
-        castTextAndShadow.animate().translationY(-castTextAndShadow.getBottom()).withEndAction(new Runnable() {
-            @Override
-            public void run() {
-                castText.setText(StikitActivity.this.getResources().getString(R.string.initial_note));
-                castTextAndShadow.setAlpha(0);
-                castTextAndShadow.setTranslationY(0);
-                castTextAndShadow.animate().alpha(1);
-            }
-        });
         if (smf != null) {
             sendMessage(smf.Message(message, color, command));
+            // animate transition up then alpha fade in from origin
+            castTextAndShadow.animate().translationY(-castTextAndShadow.getBottom()).withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    castText.setText(StikitActivity.this.getResources().getString(R.string.initial_note));
+                    castTextAndShadow.setAlpha(0);
+                    castTextAndShadow.setTranslationY(0);
+                    castTextAndShadow.animate().alpha(1);
+                }
+            });
         }
     }
 

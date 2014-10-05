@@ -43,10 +43,12 @@
 
     </LinearLayout>
 
+    <!--
     <Button
         android:id="@+id/temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Emulators are shit"
         android:layout_alignParentBottom="true"/>
+        -->
 </RelativeLayout>
